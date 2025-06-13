@@ -48,14 +48,24 @@
 
         <!-- Bosilganda aylanish uchun JS -->
         <script>
-            document.querySelectorAll('.flip-button').forEach(button => {
-                button.addEventListener('click', () => {
-                    button.classList.toggle('aktiv');
+            const cardlar = document.querySelectorAll('.flip-button');
+
+            cardlar.forEach(card => {
+                card.addEventListener('click', () => {
+                    // kartani aylantirish
+                    card.classList.toggle('aktiv');
+
+                    // faqat old tarafdagi rus so‘zini o‘qib berish
+                    const rusSoz = card.querySelector('.flip-button-front').textContent.trim();
+
+                    const nutq = new SpeechSynthesisUtterance(rusSoz);
+                    nutq.lang = 'ru-RU'; // Rus tili uchun
+                    speechSynthesis.cancel(); // eski ovozni to‘xtatish
+                    speechSynthesis.speak(nutq);
                 });
             });
         </script>
           
-
     </body>
 
 </html>
