@@ -3,21 +3,27 @@
 <%- include('./partials/head.ejs') %>
 
     <body>
-
         <div class="cards-grid">
             <% postlar.forEach(post=> { %>
                 <div class="flip-button">
                     <div class="flip-button-inner">
                         <div class="flip-button-front">
-                            <%= post.ru %>
+                            <div>
+                                <%= post.ru %>
+                            </div>
                         </div>
                         <div class="flip-button-back">
-                            <%= post.uzb %>
+                            <div>
+                                <%= post.uzb %>
+                            </div>
                         </div>
+                        
                     </div>
                 </div>
                 <% }) %>
         </div>
+          
+
 
         <!-- Sahifalash tugmalari -->
         <div class="pagination">
@@ -48,6 +54,7 @@
                 });
             });
         </script>
+          
 
     </body>
 
