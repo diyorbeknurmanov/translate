@@ -3,8 +3,8 @@
 <%- include('./partials/head.ejs') %>
 
     <body>
-        <div class="cards-grid">
 
+        <div class="cards-grid">
             <% postlar.forEach(post=> { %>
                 <div class="flip-button">
                     <div class="flip-button-inner">
@@ -17,31 +17,37 @@
                     </div>
                 </div>
                 <% }) %>
-
         </div>
 
         <!-- Sahifalash tugmalari -->
-<div class="pagination">
-    <% if (joriySahifa> 1) { %>
-        <a href="/?page=<%= joriySahifa - 1 %>">‹</a>
-        <% } %>
+        <div class="pagination">
+            <% if (joriySahifa> 1) { %>
+                <a href="/?page=<%= joriySahifa - 1 %>">‹</a>
+                <% } %>
 
-            <% for (let i=1; i <=jamiSahifa; i++) { %>
-                <% if ( i===1 || i===jamiSahifa || (i>= joriySahifa - 1 && i <= joriySahifa + 1) ) { %>
-                        <a href="/?page=<%= i %>" class="<%= i === joriySahifa ? 'active' : '' %>">
-                            <%= i %>
-                        </a>
-                        <% } else if ( i===joriySahifa - 2 || i===joriySahifa + 2 ) { %>
-                            <span>...</span>
-                            <% } %>
-                                <% } %>
-
-                                    <% if (joriySahifa < jamiSahifa) { %>
-                                        <a href="/?page=<%= joriySahifa + 1 %>">›</a>
+                    <% for (let i=1; i <=jamiSahifa; i++) { %>
+                        <% if (i===1 || i===jamiSahifa || (i>= joriySahifa - 1 && i <= joriySahifa + 1)) { %>
+                                <a href="/?page=<%= i %>" class="<%= i === joriySahifa ? 'active' : '' %>">
+                                    <%= i %>
+                                </a>
+                                <% } else if (i===joriySahifa - 2 || i===joriySahifa + 2) { %>
+                                    <span>...</span>
+                                    <% } %>
                                         <% } %>
-</div>
 
+                                            <% if (joriySahifa < jamiSahifa) { %>
+                                                <a href="/?page=<%= joriySahifa + 1 %>">›</a>
+                                                <% } %>
+        </div>
 
+        <!-- Bosilganda aylanish uchun JS -->
+        <script>
+            document.querySelectorAll('.flip-button').forEach(button => {
+                button.addEventListener('click', () => {
+                    button.classList.toggle('aktiv');
+                });
+            });
+        </script>
 
     </body>
 
