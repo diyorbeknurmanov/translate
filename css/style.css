@@ -1,113 +1,263 @@
-/* Asosiy sozlamalar */
+
 * {
-  box-sizing: border-box;
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-  font-family: 'Segoe UI', sans-serif;
-  background-color: #1e293b; /* to'q kulrang, ko‘zni charchatmaydi */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   min-height: 100vh;
-  padding: 30px 16px;
+  padding: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-/* Grid */
-.cards-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-  gap: 16px;
-  width: 100%;
-  max-width: 900px;
+.header {
+  text-align: center;
+  margin-bottom: 30px;
 }
 
-/* Flip karta */
+.header h1 {
+  color: white;
+  font-size: 2.5rem;
+  font-weight: 300;
+  margin-bottom: 10px;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+}
+
+.header p {
+  color: rgba(255,255,255,0.8);
+  font-size: 1.1rem;
+}
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 25px;
+  max-width: 1200px;
+  width: 100%;
+  margin-bottom: 40px;
+}
+
 .flip-button {
   perspective: 1000px;
+  height: 150px;
   cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.flip-button:hover {
+  transform: translateY(-5px);
 }
 
 .flip-button-inner {
   position: relative;
   width: 100%;
-  min-height: 90px;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   transform-style: preserve-3d;
-  transition: transform 0.5s ease;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
 }
 
 .flip-button.aktiv .flip-button-inner {
   transform: rotateY(180deg);
 }
 
-/* Oldi va orqa qismlar */
 .flip-button-front,
 .flip-button-back {
   position: absolute;
   width: 100%;
-  min-height: 90px;
-  padding: 10px;
-  border-radius: 10px;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  height: 100%;
   backface-visibility: hidden;
-  font-size: 14px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  font-weight: 500;
   text-align: center;
-  word-break: break-word;
-  white-space: pre-wrap;
+  padding: 20px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.15);
 }
 
-/* Oldi qismi */
 .flip-button-front {
-  background: #38bdf8; /* soft ko‘k */
-  color: #0f172a;
+  background: linear-gradient(145deg, #4facfe 0%, #00f2fe 100%);
+  color: white;
+  border: 3px solid rgba(255,255,255,0.2);
 }
 
-/* Orqa qismi */
 .flip-button-back {
+  background: linear-gradient(145deg, #fa709a 0%, #fee140 100%);
+  color: #2c3e50;
   transform: rotateY(180deg);
-  background: #34d399; /* pastel yashil */
-  color: #064e3b;
+  border: 3px solid rgba(255,255,255,0.3);
 }
 
-/* Pagination */
+.flip-button-front div,
+.flip-button-back div {
+  position: relative;
+}
+
+.flip-button-front::before {
+  content: '🇷🇺';
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  font-size: 1.2rem;
+}
+
+.flip-button-back::before {
+  content: '🇺🇿';
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  font-size: 1.2rem;
+}
+
+.flip-button::after {
+  content: '🔊';
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+  font-size: 1.1rem;
+  opacity: 0.7;
+  z-index: 10;
+  pointer-events: none;
+}
+
 .pagination {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 6px;
-  margin-top: 24px;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255,255,255,0.1);
+  padding: 15px 25px;
+  border-radius: 50px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.2);
 }
 
 .pagination a,
 .pagination span {
-  padding: 4px 10px;
-  font-size: 13px;
-  border-radius: 5px;
-  color: #cbd5e1;
-  background-color: #334155;
-  border: 1px solid #475569;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
   text-decoration: none;
-  transition: 0.2s;
-}
-
-.pagination a:hover,
-.pagination a.active {
-  background-color: #0ea5e9;
   color: white;
-  border-color: #0ea5e9;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.2);
 }
 
-/* Responsivlik */
-@media (max-width: 500px) {
+.pagination a:hover {
+  background: rgba(255,255,255,0.2);
+  transform: scale(1.1);
+}
+
+.pagination a.active {
+  background: linear-gradient(145deg, #4facfe 0%, #00f2fe 100%);
+  box-shadow: 0 5px 15px rgba(79, 172, 254, 0.4);
+  transform: scale(1.1);
+}
+
+.pagination span {
+  background: none;
+  border: none;
+  cursor: default;
+}
+
+@keyframes flipAnimation {
+  0% { transform: rotateY(0deg); }
+  100% { transform: rotateY(180deg); }
+}
+
+@keyframes bounceIn {
+  0% {
+      opacity: 0;
+      transform: scale(0.3) translateY(-50px);
+  }
+  50% {
+      opacity: 1;
+      transform: scale(1.05) translateY(0);
+  }
+  70% {
+      transform: scale(0.9);
+  }
+  100% {
+      opacity: 1;
+      transform: scale(1);
+  }
+}
+
+.flip-button {
+  animation: bounceIn 0.6s ease-out both;
+}
+
+.flip-button:nth-child(1) { animation-delay: 0.1s; }
+.flip-button:nth-child(2) { animation-delay: 0.2s; }
+.flip-button:nth-child(3) { animation-delay: 0.3s; }
+.flip-button:nth-child(4) { animation-delay: 0.4s; }
+.flip-button:nth-child(5) { animation-delay: 0.5s; }
+.flip-button:nth-child(6) { animation-delay: 0.6s; }
+.flip-button:nth-child(7) { animation-delay: 0.7s; }
+.flip-button:nth-child(8) { animation-delay: 0.8s; }
+.flip-button:nth-child(9) { animation-delay: 0.9s; }
+.flip-button:nth-child(10) { animation-delay: 1s; }
+
+@media (max-width: 768px) {
+  .cards-grid {
+      grid-template-columns: 1fr;
+      max-width: 400px;
+  }
+  
+  .header h1 {
+      font-size: 2rem;
+  }
+  
+  .flip-button {
+      height: 120px;
+  }
+  
   .flip-button-front,
   .flip-button-back {
-    font-size: 13px;
-    padding: 8px;
-    min-height: 80px;
+      font-size: 1.1rem;
+  }
+}
+
+.sound-indicator {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: rgba(0,0,0,0.8);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 25px;
+  display: none;
+  align-items: center;
+  gap: 10px;
+  z-index: 1000;
+}
+
+.sound-indicator.active {
+  display: flex;
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+      transform: translateX(100%);
+      opacity: 0;
+  }
+  to {
+      transform: translateX(0);
+      opacity: 1;
   }
 }
